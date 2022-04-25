@@ -77,7 +77,7 @@ RUN rm -rf /var/cache/apk/*
 #RUN usermod -u ${USER_ID} www-data
 
 # 8 Copy existing application directory permissions
-#COPY --chown=www-data:www-data . /usr/src/app
+COPY . /usr/src/app
 
 RUN composer install --no-scripts --prefer-dist --no-interaction --optimize-autoloader
 
