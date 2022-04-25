@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="eu">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Hasi saioa{% endblock %}</title>
+    {% block stylesheets %}
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <style>
+            body{
+                padding-top:4.2rem;
+                padding-bottom:4.2rem;
+                background:#fff;
+            }
+            a{
+                text-decoration:none !important;
+            }
+            h1,h2,h3{
+                font-family: 'Kaushan Script', cursive;
+            }
+            .myform{
+                position: relative;
+                display: -ms-flexbox;
+                display: flex;
+                padding: 1rem;
+                -ms-flex-direction: column;
+                flex-direction: column;
+                width: 100%;
+                pointer-events: auto;
+                background-color: #fff;
+                background-clip: padding-box;
+                border: 1px solid rgba(0,0,0,.2);
+                border-radius: 1.1rem;
+                outline: 0;
+                max-width: 500px;
+            }
+            .tx-tfm{
+                text-transform:uppercase;
+            }
+            .mybtn{
+                border-radius:50px;
+            }
+
+            .login-or {
+                position: relative;
+                color: #aaa;
+                margin-top: 10px;
+                margin-bottom: 10px;
+                padding-top: 10px;
+                padding-bottom: 10px;
+            }
+            .span-or {
+                display: block;
+                position: absolute;
+                left: 50%;
+                top: -2px;
+                margin-left: -25px;
+                background-color: #fff;
+                width: 50px;
+                text-align: center;
+            }
+            .hr-or {
+                height: 1px;
+                margin-top: 0px !important;
+                margin-bottom: 0px !important;
+            }
+            .google {
+                color:#666;
+                width:100%;
+                height:40px;
+                text-align:center;
+                outline:none;
+                border: 1px solid lightgrey;
+            }
+            form .error {
+                color: #ff0000;
+            }
+            #second{display:none;}
+        </style>
+    {% endblock %}
+    {% block javascripts %}
+{#        {{ encore_entry_script_tags('main') }}#}
+    {% endblock %}
+</head>
+<body class="text-center aliexpress_superstar_plugin_present">
+<div class="container">
+
+                <div class="row">
+                    <div class="col-md-5 mx-auto">
+                        <div id="first">
+                            <div class="myform form ">
+                                <div class="logo mb-3">
+                                    <div class="col-md-12 text-center">
+                                        <h1>Hasi saioa</h1>
+                                    </div>
+                                </div>
+                                <form method="post">
+                            {% if error %}
+                                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                            {% endif %}
+
+                            {% if app.user %}
+                                <div class="mb-3">
+                                    {{ app.user.username }} bezala hasi duzu saioa, <a href="{{ path('app_logout') }}">Amaitu saioa</a>
+                                </div>
+                            {% endif %}
+
+                            {# <h1 class="h3 mb-3 font-weight-normal">Hasi saioa</h1>#}
+                            <div class="form-group">
+                                <label for="inputUsername">Erabiltzailea</label>
+                                <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" autocomplete="username" required autofocus>
+                            </div>
+                            <div class="form-group">
+                            <label for="inputPassword">Pasahitza</label>
+                            <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+                            </div>
+
+                            <input type="hidden" name="_csrf_token"
+                                   value="{{ csrf_token('authenticate') }}"
+                            >
+
+                            <div class="form-group">
+                                <div class="checkbox mb-3">
+                                    <label>
+                                        <input type="checkbox" name="remember_me"> Oroitu nazazu
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 text-center ">
+                                <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm">Hasi saioa</button>
+                            </div>
+{#                            <button class="btn btn-lg btn-primary" type="submit">#}
+{#                                Hasi saioa#}
+{#                            </button>#}
+                        </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+</div>
+<!-- ./wrapper -->
+
+<div style="display: none;">
+    <label for="appLocale"></label><input id="appLocale" type="text" value="{{ app.request.locale  }}">
+</div>
+
+</body>
+</html>
+
+
+
