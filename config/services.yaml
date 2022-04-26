@@ -32,7 +32,22 @@ services:
     Symfony\Component\HttpFoundation\Session\Storage\Handler\RedisSessionHandler:
         arguments:
             - '@Redis'
+            - prefix: langileak_
+            - ttl: 31536000
             # you can optionally pass an array of options. The only options are 'prefix' and 'ttl',
             # which define the prefix to use for the keys to avoid collision on the Redis server
             # and the expiration time for any given entry (in seconds), defaults are 'sf_s' and null:
             # - { 'prefix': 'my_prefix', 'ttl': 600 }
+
+    App\Security\PasaiaLdapService:
+        class: App\Security\PasaiaLdapService
+        autoconfigure: true
+        arguments:
+            - "%env(resolve:LDAP_IP)%"
+            - "%env(resolve:LDAP_SEARCH_DN)%"
+            - "%env(resolve:LDAP_BASE_DN)%"
+            - "%env(resolve:LDAP_PASSWD)%"
+            - "%env(resolve:LDAP_ADMIN_TALDEAK)%"
+            - "%env(resolve:LDAP_KUDEATU_TALDEAK)%"
+            - "%env(resolve:LDAP_USER_TALDEA)%"
+            - '@Doctrine\ORM\EntityManagerInterface'

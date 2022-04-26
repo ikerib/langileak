@@ -105,6 +105,7 @@ RUN php bin/console cache:clear
 RUN mkdir -p /usr/src/app/public/uploads
 RUN chmod -R 777 /usr/src/app/public/uploads
 
+RUN rm -fr node_modules
 RUN yarn install
 
 RUN if [[ "$FOSJSDUMP" = "0"]] ; \
