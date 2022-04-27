@@ -114,6 +114,13 @@
                     </q-input>
                   </q-item-section>
                 </q-item>
+
+                <q-item>
+                  <q-item-section>
+                    <q-checkbox left-label v-model="editedItem.isValid" label="Onartzen da (Markatu baiezkoa bada)" />
+                  </q-item-section>
+                </q-item>
+
               </q-list>
             </q-form>
           </q-card-section>
@@ -170,6 +177,7 @@ import {DateTime} from "luxon";
 const columns = [
   {name: 'name', label: 'Udala', align: 'left', field: 'name'},
   {name: 'taldea', label: 'Taldea', align: 'left', field: 'taldea', },
+  {name: 'lanaldia', label: 'Lanaldia', align: 'left', field: 'lanaldia', },
   {
     name: 'startDate',
     label: 'Hasi',
@@ -197,14 +205,17 @@ const defaultItem = ref({
   endDate: '',
   years: 0,
   months: 0,
-  days: 0
+  days: 0,
+  isValid: true
 })
 export default {
   name: "employeeContractTable",
   props: {
+    onartua: Boolean,
     rows: {
-      type: Array
+      type: Array,
     }
+
   },
   setup(props, context) {
     const store = useEmployeeStore();
@@ -214,6 +225,7 @@ export default {
 
     let isDialogActionEdit = ref(false);
     const tableData = props.rows;
+    const onartua = props.onartua;
     return {
       taldeak: computed(() => store.getTaldeak),
       columns,
@@ -231,6 +243,7 @@ export default {
       totalRecord: 0,
       pageCount: 1,
       tableData,
+      onartua,
       isDialogActionEdit
     }
   },
@@ -245,7 +258,8 @@ export default {
         endDate: '',
         years: 0,
         months: 0,
-        days: 0
+        days: 0,
+        isValid: this.onartua
       }
       // this.editedItem = Object.assign({}, defaultItem);
       this.isDialogActionEdit = false;

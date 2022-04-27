@@ -47,6 +47,10 @@ class Contract
     #[Groups(['contract:list', 'contract:item','employee:item'])]
     private $days;
 
+    #[ORM\Column(type: 'boolean', nullable: true)]
+    #[Groups(['contract:list', 'contract:item','employee:item'])]
+    private $isValid;
+
     /************************************************************************************************/
     /************************************************************************************************/
     /************************************************************************************************/
@@ -57,9 +61,6 @@ class Contract
     #[ORM\ManyToOne(targetEntity: Group::class, inversedBy: 'contracts')]
     #[Groups(['contract:list', 'contract:item','employee:item'])]
     private $taldea;
-
-    #[ORM\Column(type: 'boolean', nullable: true)]
-    private $isValid;
 
     public function __toString(): string
     {

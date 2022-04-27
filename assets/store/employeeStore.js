@@ -8,7 +8,9 @@ export const useEmployeeStore = defineStore({
         return {
             groups: [],
             employees: [],
-            employee: {},
+            employee: {
+                contracts:[]
+            },
             result: '',
             totalDays: 0,
             years: 0,
@@ -22,6 +24,16 @@ export const useEmployeeStore = defineStore({
         },
         getTaldeak(state) {
             return state.groups;
+        },
+        getValidContracts: (state) => {
+            return state.employee.contracts.filter(
+                c => c.isValid === true || c.isValid === null || c.name === 'TOTAL'
+            );
+        },
+        getInvalidContracts: (state) => {
+            return state.employee.contracts.filter(
+                c => c.isValid === false
+            )
         }
     },
     actions: {
@@ -180,6 +192,7 @@ export const useEmployeeStore = defineStore({
                     item.months = data.months
                     item.days = data.days
                     item.taldea = contract.taldea
+                    item.isValid = contract.isValid
                     return item;
                 }
             })
@@ -213,6 +226,7 @@ export const useEmployeeStore = defineStore({
             data.months = Math.floor((data.totalDays-(data.years*365))/30.4)
             data.days = Math.floor(data.totalDays - (data.years * 365) - (data.months * 30.4));
             data.taldea = contract.taldea;
+            data.isValid = contract.isValid;
 
             this.employee.contracts.push(data)
             this.updateEmployee(this.employee);
