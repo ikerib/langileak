@@ -3,6 +3,7 @@
     <div class="q-pa-md">
       <div class="row q-col-gutter-sm">
         <div class="col">
+
           <q-table
               flat
               bordered
@@ -66,6 +67,19 @@
                         option-value="id"
                         option-label="name"
                         label="Taldea" />
+                  </q-item-section>
+                </q-item>
+
+                <q-item>
+                  <q-item-section>
+                    <q-item-label class="q-pb-xs">Lanaldia</q-item-label>
+                    <q-input
+                        type="number"
+                        dense outlined
+                        v-model="editedItem.lanaldia"
+                        style="max-width: 200px"
+                        step="0.5"
+                    />
                   </q-item-section>
                 </q-item>
 
@@ -200,6 +214,7 @@ const columns = [
 ]
 const defaultItem = ref({
   name: '',
+  lanaldia: '',
   taldea: '',
   startDate: '',
   endDate: '',
@@ -253,6 +268,7 @@ export default {
       console.log(defaultItem)
       this.editedItem = {
         name: '',
+        lanaldia: '',
         taldea: '',
         startDate: '',
         endDate: '',

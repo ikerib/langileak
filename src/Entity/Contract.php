@@ -35,6 +35,10 @@ class Contract
     #[Groups(['contract:list', 'contract:item','employee:item','contract:write'])]
     private $name;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['contract:list', 'contract:item','employee:item','contract:write'])]
+    private $lanaldia;
+
     #[ORM\Column(type: 'date', nullable: true)]
     #[Groups(['contract:list', 'contract:item','employee:item','contract:write'])]
     private $startDate;
@@ -44,11 +48,11 @@ class Contract
     private $endDate;
 
     #[ORM\Column(type: 'integer', nullable: true)]
-    #[Groups(['contract:list', 'contract:item','employee:item'])]
+    #[Groups(['contract:list', 'contract:item','employee:item','contract:write'])]
     private $days;
 
     #[ORM\Column(type: 'boolean', nullable: true)]
-    #[Groups(['contract:list', 'contract:item','employee:item'])]
+    #[Groups(['contract:list', 'contract:item','employee:item','contract:write'])]
     private $isValid;
 
     /************************************************************************************************/
@@ -168,6 +172,18 @@ class Contract
     public function setIsValid(?bool $isValid): self
     {
         $this->isValid = $isValid;
+
+        return $this;
+    }
+
+    public function getLanaldia(): ?string
+    {
+        return $this->lanaldia;
+    }
+
+    public function setLanaldia(?string $lanaldia): self
+    {
+        $this->lanaldia = $lanaldia;
 
         return $this;
     }

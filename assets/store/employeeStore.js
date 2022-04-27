@@ -110,7 +110,9 @@ export const useEmployeeStore = defineStore({
                     let totalMonths = 0;
                     let totalDays = 0;
                     let totalTotalDays = 0;
-                    myData.contracts.map( data => {
+                    myData.contracts.filter(
+                        c => c.isValid === true
+                    ).map( data => {
                         const dateStart = DateTime.fromISO(data.startDate, { locale: "es" });
                         const dateEnd = DateTime.fromISO(data.endDate, { locale: "es" });
                         const dDiff = dateEnd.diff(dateStart, ["days"]).toObject()
@@ -176,6 +178,7 @@ export const useEmployeeStore = defineStore({
             const dDiff = dateEnd.diff(dateStart, ["days"]).toObject()
 
             data.name = contract.name;
+            data.lanaldia = contract.lanaldia;
             data.startDate = dateStart.toISO();
             data.endDate = dateEnd.toISO();
             data.totalDays = Math.round(dDiff.days);
@@ -185,6 +188,7 @@ export const useEmployeeStore = defineStore({
             this.employee.contracts.map( item => {
                 if ( item.id === contract.id ) {
                     item.name = data.name
+                    item.lanaldia = data.lanaldia
                     item.startDate = data.startDate
                     item.endDate = data.endDate
                     item.totalDays = data.totalDays
@@ -219,6 +223,7 @@ export const useEmployeeStore = defineStore({
             }
             const dDiff = dateEnd.diff(dateStart, ["days"]).toObject()
             data.name = contract.name;
+            data.lanaldia = contract.lanaldia;
             data.startDate = dateStart.toISO();
             data.endDate = dateEnd.toISO();
             data.totalDays = Math.round(dDiff.days);
