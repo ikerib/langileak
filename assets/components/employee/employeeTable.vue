@@ -161,8 +161,7 @@ import {date} from "quasar";
 
 const columns = [
   { name:  'id',              label: 'id',          align: 'left',    field: 'id',                sortable: true ,  classes: 'hidden', headerClasses: 'hidden'},
-  { name: 'name',             label: 'Izena',       align: 'left',    field: 'name',              sortable: true },
-  { name: 'surname',          label: 'Abizenak',    align: 'left',    field: 'surname',           sortable: true },
+  { name: 'name',             label: 'Langilea',       align: 'left',    field: 'name',              sortable: true },
   { name: 'dateStartWorking', label: 'Lanean hasi', align: 'right',  field: 'dateStartWorking',   sortable: true,   format: val => date.formatDate(val, 'YYYY/MM/DD'),  style: 'max-width: 100px', headerClasses: '', headerStyle: 'max-width: 100px'},
   { name: 'years',            label: 'U',           align: 'center',  field: 'years',             sortable: false,  style: 'max-width: 20px', headerClasses: '', headerStyle: 'max-width: 20px'},
   { name: 'months',           label: 'H',           align: 'center',  field: 'months',            sortable: false,  style: 'max-width: 20px', headerClasses: '', headerStyle: 'max-width: 20px'},

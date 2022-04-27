@@ -82,6 +82,9 @@ class Employee
     #[Groups(["employee:item"])]
     private $contracts;
 
+    #[ORM\Column(type: 'text', nullable: true)]
+    private $notes;
+
     public function __construct()
     {
         $this->contracts = new ArrayCollection();
@@ -267,6 +270,18 @@ class Employee
     public function setNumberDaysOf(?int $numberDaysOf): self
     {
         $this->numberDaysOf = $numberDaysOf;
+
+        return $this;
+    }
+
+    public function getNotes(): ?string
+    {
+        return $this->notes;
+    }
+
+    public function setNotes(?string $notes): self
+    {
+        $this->notes = $notes;
 
         return $this;
     }

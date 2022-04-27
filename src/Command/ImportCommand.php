@@ -56,6 +56,7 @@ class ImportCommand extends Command
         for ($i=1; $i < $sheetCount; $i++) {
             $sheet = $spreadsheet->getSheet($i);
             $sheetTitle = $sheet->getTitle();
+            $isValid = true;
             $io->note('index: ' . $i . ' irakurtzen => ' . $sheet->getTitle()  );
             $sheetData = $sheet->toArray(null, true, true, true);
             if ($sheetData[4]['A'] === null) {
@@ -91,6 +92,11 @@ class ImportCommand extends Command
                 if ( $sheetData[$k]['A'] === null ) {
                     continue;
                 }
+                if ( $sheetData[$k]['A'] === 'EZ DA ONARTZEN' ) {
+                    $isValid = false;
+                    continue;
+                }
+
 
                 $companyName = $sheetData[$k]['A'];
                 $start = $sheetData[$k]['B'];
@@ -152,6 +158,7 @@ class ImportCommand extends Command
 
                 $totalDays += $diff;
                 $contract->setDays($diff);
+                $contract->setIsValid($isValid);
                 $this->em->persist($contract);
                 $this->em->flush();
             }

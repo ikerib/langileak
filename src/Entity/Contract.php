@@ -58,6 +58,9 @@ class Contract
     #[Groups(['contract:list', 'contract:item','employee:item'])]
     private $taldea;
 
+    #[ORM\Column(type: 'boolean', nullable: true)]
+    private $isValid;
+
     public function __toString(): string
     {
         return $this->name;
@@ -152,6 +155,18 @@ class Contract
     public function setTaldea(?Group $taldea): self
     {
         $this->taldea = $taldea;
+
+        return $this;
+    }
+
+    public function getIsValid(): ?bool
+    {
+        return $this->isValid;
+    }
+
+    public function setIsValid(?bool $isValid): self
+    {
+        $this->isValid = $isValid;
 
         return $this;
     }
